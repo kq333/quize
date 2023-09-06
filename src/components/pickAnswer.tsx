@@ -11,11 +11,11 @@ export const PickAnsware = () => {
 
   return (
     <div>
-      <h2 className="py-4 text-4xl font-bold leading-10 text-white">
+      <h2 className="py-4 text-lg md:text-4xl font-bold leading-10 text-white">
         Country quiz
       </h2>
 
-      <div className="w-[464px] h-[515px] bg-white rounded-3xl">
+      <div className="w-[264px] md:w-[464px] h-[515px] bg-white rounded-3xl ">
         <div className="flex justify-end">
           <img
             className="w-40 h-28 mt-[-75px]"
@@ -25,17 +25,17 @@ export const PickAnsware = () => {
         </div>
 
         <div className="py-8 px-8">
-          <h2 className="text-[#2F527B] text-2xl font-bold pb-8">
+          <h2 className="text-[#2F527B] md:text-2xl text-lg font-bold pb-8">
             Kuala Lumpur is the capital of
           </h2>
 
-          <div className="h-[56px] w-[400px] border rounded-xl border-[#6066D0] flex items-center cursor-pointer hover:bg-[#F9A826] hover:text-white text-[#2F527B]">
+          <div className="h-[56px] md:w-[400px] max-w-[400px] border rounded-xl border-[#6066D0] flex items-center cursor-pointer hover:bg-[#F9A826] hover:text-white text-[#2F527B]">
             <span className="px-4">A</span>
 
-            <span className="px-8 text-lg font-medium  ">vietnam</span>
+            <span className="md:px-8 px-px md:text-lg text-md font-medium  ">vietnam</span>
 
-            <div className="flex justify-end w-[400px] px-4 ">
-              <img className="hidden" src={icons} alt="icon" />
+            <div className="flex justify-end md:w-[400px] w-[75px] md:px-4 px-1 hidden">
+              <img  src={icons} alt="icon" />
             </div>
           </div>
 
