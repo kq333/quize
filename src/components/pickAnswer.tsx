@@ -10,6 +10,7 @@ interface Props {
   answers: string[]
   flags: boolean
   updateQuiz: () => void
+  quizResults: (quizAnsweres: number) => void
 }
 
 export const PickAnsware: React.FC<Props> = (props) => {
@@ -24,6 +25,9 @@ export const PickAnsware: React.FC<Props> = (props) => {
   const buttonEvents = (elem: string) => {
     setIsAnswere(elem)
     setCheckAnswere(!checkAnswere)
+    if (elem === correctAnswer) {
+      props.quizResults(1)
+    }
   }
 
   const buttonNext = () => {
@@ -38,7 +42,10 @@ export const PickAnsware: React.FC<Props> = (props) => {
         Country quiz
       </h2>
 
-      <div className="w-[264px] md:w-[464px]  bg-white rounded-3xl ">
+      <div
+        className="w-[264px] md:w-[464px]  bg-white rounded-3xl
+"
+      >
         <div className="flex justify-end">
           <img
             className="w-40 h-28 mt-[-75px]"
@@ -77,15 +84,11 @@ export const PickAnsware: React.FC<Props> = (props) => {
 
                     ${
                       correctAnswer === elem && checkAnswere
-                        ? 'bg-[#60BF88]'
+                        ? 'border-[#60BF88]  bg-green-500'
                         : ''
                     }
                   ${correctAnswer === elem && checkAnswere ? 'text-white' : ''}
-                ${
-                  correctAnswer === elem && checkAnswere
-                    ? 'border-[#60BF88]'
-                    : ''
-                }
+
 
                 ${
                   elem === isAnswere && elem !== correctAnswer
@@ -139,7 +142,10 @@ export const PickAnsware: React.FC<Props> = (props) => {
               <button
                 type="button"
                 className={`bg-[#F9A826] w-[115px] h-[56px] text-lg text-white rounded-xl hover:opacity-75
-                ${isAnswere.length ? 'block' : 'hidden'}`}
+                ${isAnswere.length ? 'block' : 'hidden'}
+                   my-button
+
+                `}
                 onClick={() => buttonNext()}
               >
                 Next
