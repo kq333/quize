@@ -9,7 +9,7 @@ export const ResultComponent = () => {
         Country quiz
       </h2>
 
-      <div className="w-[464px] h-[515px] bg-white rounded-3xl">
+      <div className="max-w-[464px]  md:w-[464px] h-[515px] bg-white rounded-3xl">
         <div className="pt-[42px] pb-[72px] flex justify-center">
           <img
             className="w-[228px] h-[136px]"
@@ -18,11 +18,11 @@ export const ResultComponent = () => {
           />
         </div>
 
-        <h2 className="text-[#2F527B] text-5xl font-bold pb-8 flex justify-center">
+        <h2 className="text-[#2F527B] lg:text-5xl text-3xl font-bold pb-8 flex justify-center">
           Results
         </h2>
 
-        <p className="flex justify-center pb-[51px] items-center text-lg">
+        <p className="flex justify-center pb-[51px] items-center text-sm md:text-lg">
           You got{' '}
           <span className="text-[#6FCF97] text-4xl font-bold px-1 ">4</span>
           correct answers
