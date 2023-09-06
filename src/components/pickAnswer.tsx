@@ -82,31 +82,18 @@ export const PickAnsware: React.FC<Props> = (props) => {
                         : 'text-[#2F527B]'
                     }
 
-                    ${
-                      correctAnswer === elem && checkAnswere
-                        ? 'border-[#60BF88]  bg-green-500'
-                        : ''
-                    }
-                  ${correctAnswer === elem && checkAnswere ? 'text-white' : ''}
-
-
+                  ${
+                    correctAnswer === elem && checkAnswere
+                      ? 'text-white border-[#60BF88]  bg-green-500'
+                      : ''
+                  }
+                  
                 ${
                   elem === isAnswere && elem !== correctAnswer
-                    ? 'bg-red-400'
+                    ? 'bg-red-400 text-white'
                     : ''
                 }
 
-                ${
-                  elem === isAnswere && elem !== correctAnswer
-                    ? 'text-white'
-                    : ''
-                }
-
-                ${
-                  elem === isAnswere && elem !== correctAnswer
-                    ? 'border-red-400'
-                    : ''
-                }
                 ${checkAnswere ? 'pointer-events-none' : ''}
                     `}
                     key={index}
@@ -141,10 +128,8 @@ export const PickAnsware: React.FC<Props> = (props) => {
             <div className="flex justify-end pt-8">
               <button
                 type="button"
-                className={`bg-[#F9A826] w-[115px] h-[56px] text-lg text-white rounded-xl hover:opacity-75
+                className={`bg-[#F9A826] w-[115px] h-[56px] text-lg text-white rounded-xl hover:opacity-75  my-button
                 ${isAnswere.length ? 'block' : 'hidden'}
-                   my-button
-
                 `}
                 onClick={() => buttonNext()}
               >
