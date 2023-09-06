@@ -5,7 +5,10 @@ import { ResultComponent } from './components/resultsComponent'
 
 function App() {
   const url = 'https://restcountries.com/v3.1/all'
-  const [fetchedData, setFetchedData] = useState([])
+  const [fetchedData, setFetchedData] = useState<string[]>([])
+  const [reloadTrigger, setReloadTrigger] = useState<boolean>(false)
+  const [gameNumber, setGameNumber] = useState<number>(12)
+  const [quizResult, setQuizResult] = useState<number>(0)
 
   useEffect(() => {
     fetch(url)
@@ -42,16 +45,17 @@ function App() {
               question: `What is the capital of ${elem.name.common}?`,
               correctAnswer: elem.capital[0],
               answers: allAnswers,
+              flags: false,
             }
           })
 
           const createFlagObj = randomItems.map((elem) => {
-            const allAnswers = [elem.flags.svg]
+            const allAnswers = [elem.name.common]
 
             while (allAnswers.length < 4) {
               const randomAnswer =
-                randomItems[Math.floor(Math.random() * randomItems.length)]
-                  .flags.svg
+                randomItems[Math.floor(Math.random() * randomItems.length)].name
+                  .common
               if (!allAnswers.includes(randomAnswer)) {
                 allAnswers.push(randomAnswer)
               }
@@ -63,32 +67,58 @@ function App() {
             }
 
             return {
-              question: `What is the color of ${elem.name.common} flag?`,
-              correctAnswer: elem.flags.svg,
+              question: `Which country does this flag belong to?`,
+              flagIcon: elem.flags.svg,
+              correctAnswer: elem.name.common,
               answers: allAnswers,
+              flags: true,
             }
           })
 
-          /* console.log(createCapitalObj[0]); */
-          console.log(createFlagObj[0])
+          const randomIndex = Math.floor(Math.random() * 2);
+          if (randomIndex === 0) {
+            setFetchedData(createCapitalObj[0]);
+          } else {
+            setFetchedData(createFlagObj[0]);
+          }
         },
 
-        /*  setFetchedData(data) */
       )
       .catch((error) => console.log(error))
-  }, []);
+  }, [reloadTrigger])
 
+  const updateQuiz = () => {
+    setReloadTrigger(!reloadTrigger)
+    setGameNumber((prevGameNumber) => prevGameNumber - 1)
+  }
 
+  const quizResults = (elem: number) => {
+    setQuizResult((prevGameNumber) => prevGameNumber + elem)
+  }
 
+  const reloadQuize: void = () => {
 
-  
+    setReloadTrigger(!reloadTrigger)
+    setGameNumber(12)
+    setQuizResult(0)
+  }
 
   return (
     <div className="bg-[url('./assets/background.png')] h-screen w-screen mx-auto flex flex-col">
       <main className="flex-grow flex flex-col justify-center items-center">
         <section>
-          <PickAnsware />
-          {/*    <ResultComponent /> */}
+          {gameNumber === 0 ? (
+            <ResultComponent
+            quizResult={quizResult}
+            reloadQuize={reloadQuize}
+            />
+          ) : (
+            <PickAnsware
+              fetchedData={fetchedData}
+              updateQuiz={updateQuiz}
+              quizResults={quizResults}
+            />
+          )}
         </section>
       </main>
       <footer className="text-white">
