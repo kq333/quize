@@ -1,5 +1,3 @@
-import React from 'react'
-
 import errorImg from '../assets/error.webp'
 
 export const ErrorCopmponent = () => {
