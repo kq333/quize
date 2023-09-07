@@ -3,10 +3,17 @@ import { useState, useEffect } from 'react'
 import { PickAnsware } from './components/pickAnswer'
 import { ResultComponent } from './components/resultsComponent'
 import { ErrorCopmponent } from './components/errorComponent'
+import { Country, QuizData } from './type/types'
+
 
 function App() {
   const url = 'https://restcountries.com/v3.1/all'
-  const [fetchedData, setFetchedData] = useState<string[]>([])
+  const [fetchedData, setFetchedData] = useState<QuizData>({
+    question: '',
+    correctAnswer: '',
+    answers: [],
+    flags: false,
+  })
   const [reloadTrigger, setReloadTrigger] = useState<boolean>(false)
   const [gameNumber, setGameNumber] = useState<number>(15)
   const [quizResult, setQuizResult] = useState<number>(0)
@@ -20,7 +27,7 @@ function App() {
         }
         return res.json()
       })
-      .then((data) => {
+      .then((data: Country[]) => {
         const dataLength = data.length
 
         for (let i = dataLength - 1; i > 0; i--) {
