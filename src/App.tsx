@@ -8,13 +8,18 @@ function App() {
   const url = 'https://restcountries.com/v3.1/all'
   const [fetchedData, setFetchedData] = useState<string[]>([])
   const [reloadTrigger, setReloadTrigger] = useState<boolean>(false)
-  const [gameNumber, setGameNumber] = useState<number>(12)
+  const [gameNumber, setGameNumber] = useState<number>(15)
   const [quizResult, setQuizResult] = useState<number>(0)
-  const [isError, setIsError] = useState(false)
+  const [isError, setIsError] = useState<boolean>(false)
 
   useEffect(() => {
     fetch(url)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          setIsError(true)
+        }
+        return res.json()
+      })
       .then((data) => {
         const dataLength = data.length
 
@@ -84,7 +89,7 @@ function App() {
         }
       })
       .catch((error) => {
-        setIsError(true), console.log(error)
+        console.log(error)
       })
   }, [reloadTrigger])
 
@@ -97,9 +102,9 @@ function App() {
     setQuizResult((prevGameNumber) => prevGameNumber + elem)
   }
 
-  const reloadQuize: () => void = () => {
+  const reloadQuize = () => {
     setReloadTrigger(!reloadTrigger)
-    setGameNumber(12)
+    setGameNumber(15)
     setQuizResult(0)
   }
 
@@ -108,7 +113,7 @@ function App() {
       {isError ? (
         <ErrorCopmponent />
       ) : (
-        <div className="bg-[url('./assets/background.png')] h-screen w-screen mx-auto flex flex-col">
+        <div className="h-screen w-screen mx-auto flex flex-col">
           <main className="flex-grow flex flex-col justify-center items-center">
             <section>
               {gameNumber === 0 ? (
