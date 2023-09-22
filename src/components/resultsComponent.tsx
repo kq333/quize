@@ -7,11 +7,12 @@ interface Props {
   reloadQuize: () => void
 }
 
-export const ResultComponent: React.FC<Props> = (props) => {
-  const { quizResult } = props
-
+export const ResultComponent: React.FC<Props> = ({
+  quizResult,
+  reloadQuize,
+}) => {
   const reloadQuiz = () => {
-    props.reloadQuize()
+    reloadQuize()
   }
 
   return (
