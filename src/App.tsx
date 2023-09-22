@@ -5,9 +5,8 @@ import { ResultComponent } from './components/resultsComponent'
 import { ErrorCopmponent } from './components/errorComponent'
 import { Country, QuizData } from './type/types'
 
-
 function App() {
-  const url = 'https://restcountries.com/v3.1/all'
+  const URL = 'https://restcountries.com/v3.1/all'
   const [fetchedData, setFetchedData] = useState<QuizData>({
     question: '',
     correctAnswer: '',
@@ -20,7 +19,7 @@ function App() {
   const [isError, setIsError] = useState<boolean>(false)
 
   useEffect(() => {
-    fetch(url)
+    fetch(URL)
       .then((res) => {
         if (!res.ok) {
           setIsError(true)
@@ -139,7 +138,7 @@ function App() {
           </main>
           <footer className="text-white">
             <div className="container mx-auto py-4 text-center">
-              <span>created by username - devChallenges.io</span>
+              <span>created by kq333 - devChallenges.io</span>
             </div>
           </footer>
         </div>
