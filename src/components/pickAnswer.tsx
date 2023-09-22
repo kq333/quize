@@ -15,25 +15,28 @@ interface Props {
   quizResults: (quizAnswers: number) => void
 }
 
-export const PickAnsware: React.FC<Props> = (props) => {
+export const PickAnsware: React.FC<Props> = ({
+  fetchedData,
+  updateQuiz,
+  quizResults,
+}) => {
   const [isAnswere, setIsAnswere] = useState<string>('')
   const [checkAnswere, setCheckAnswere] = useState<boolean>(false)
 
   const alphabet = 'ABCD'.split('')
 
-  const { question, flagIcon, correctAnswer, answers, flags } =
-    props.fetchedData
+  const { question, flagIcon, correctAnswer, answers, flags } = fetchedData
 
   const buttonEvents = (elem: string) => {
     setIsAnswere(elem)
     setCheckAnswere(!checkAnswere)
     if (elem === correctAnswer) {
-      props.quizResults(1)
+      quizResults(1)
     }
   }
 
   const buttonNext = () => {
-    props.updateQuiz()
+    updateQuiz()
     setIsAnswere('')
     setCheckAnswere(false)
   }
@@ -68,7 +71,7 @@ export const PickAnsware: React.FC<Props> = (props) => {
             {Array.isArray(answers) &&
               answers.map((elem, index: number) => (
                 <li
-                  className={`h-[56px] md:w-[400px] max-w-[400px] border rounded-xl  flex items-center cursor-pointer mt-8 hover:bg-[#F9A826] bg-[#ffffff] border-[#6066D0] hover:border-[#F9A826] hover:text-white
+                  className={`h-[56px] md:w-[400px] max-w-[400px] border rounded-xl  flex items-center cursor-pointer mt-8 xl:hover:bg-[#F9A826] bg-[#ffffff] border-[#6066D0] xl:hover:border-[#F9A826] hover:text-white
                   ${
                     isAnswere === elem && !checkAnswere
                       ? 'text-white'
@@ -81,10 +84,10 @@ export const PickAnsware: React.FC<Props> = (props) => {
                   }
                   ${
                     elem === isAnswere && elem !== correctAnswer
-                      ? 'bg-red-400 text-white'
+                      ? 'bg-red-400 border-red-400  text-white'
                       : ''
                   }
-                  ${checkAnswere ? 'pointer-events-none' : ''}
+                  ${checkAnswere ? 'pointer-events-none ' : ''}
                 `}
                   key={index}
                   onClick={() => buttonEvents(elem)}
